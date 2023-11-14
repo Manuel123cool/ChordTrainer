@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chord Trainer</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="output"></div>
+    <div id="output2"></div>
+
+    <button id="next">Next</button>
+    <div id="selection">
+
+        <label for="quantity">Which degree melody note:</label>
+        <input type="text" id="degree" name="quantity">
+        <br>
+
+        <label for="chordType">Chord Type:</label>
+        <select name="chordType" id="chordType">
+          <option value="majorSeventh">Major</option>
+          <option value=" ">Dominant</option>
+          <option value="minor">Minor</option>
+          <option value="halfDiminished">Half Diminshed</option>
+        </select>
+        <br>
+
+        <label for="whichBaseNote">Chord Base Note:</label>
+        <select name="whichBaseNote" id="whichBaseNote">
+          <option value="C">C</option>
+          <option value="C#">C#</option>
+          <option value="D">D</option>
+          <option value="D#">D#</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+          <option value="F#">F#</option>
+          <option value="G">G</option>
+          <option value="G#">G#</option>
+          <option value="A">A</option>
+          <option value="A#">A#</option>
+          <option value="B">B</option>
+        </select>
+        <br>
+        <button id="addChord">Add Chords</button>
+    </div>
+
+    <div id="chords">
+
+    </div>
+
+    <div> 
+	
+	<label for="chordData">Chord Data: </label>
+	<textarea id="chordData" name="chordData" rows="4" cols="50">
+	</textarea>
+	<br>
+        <button id="serverData">Change Server Data</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.0.3/build/cjs/vexflow.js"></script>
+    <script src="createData.js" type"text/javscript"></script>
+    <script src="main.js" type"text/javscript"></script>
+</body>
+</html>
+
