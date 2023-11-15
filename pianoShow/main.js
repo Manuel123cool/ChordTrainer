@@ -358,6 +358,64 @@ document.addEventListener("DOMContentLoaded", (event) => {
 		insertCan(pianos.at(number), number);
 	    updateTextarea();
     });
+	document.getElementById("button5").addEventListener("click", (event) => {
+                const number = document.getElementById("number").value;
+		const newPianosCount = pianos.map( piano => {
+			return makeToCount(piano).map( elem => {
+				const newNum = elem + Number(number);		
+				if (newNum > 11) {
+					return newNum - 12;
+				}
+				return newNum;
+			});
+		});
+		
+	const newPianos = newPianosCount.map( elem => {
+	return elem.map( elem2 => {
+        switch(elem2) {
+            case 0:
+                return "c"; 
+                break;
+            case 1:
+                return "C";
+                break;
+	    case 2:
+		return "d";
+                break;              
+            case 3:
+		return "D";
+                break;
+            case 4:
+		return "e";
+                break;
+            case 5:
+		return "f";
+                break;  
+            case 6:
+		return "F";
+                break;
+            case 7:
+		return "g";
+                break;
+            case 8:
+		return "G";
+                break;  
+            case 9:
+		return "a";
+            break;
+            case 10:
+		return "A";
+                break;
+            case 11:
+		return "h";
+                break;  
+          }
+	});
+	}); 
+	let currentData = JSON.parse(document.getElementById("data").value);
+	currentData.pianos = newPianos;
+	document.getElementById("data").value = JSON.stringify(currentData);
+    });
 
     var c = document.getElementById("button1");
     c.addEventListener("click", (event) => {
