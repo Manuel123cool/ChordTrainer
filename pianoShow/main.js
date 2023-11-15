@@ -176,9 +176,13 @@ let notesStringGlo = [];
 var cGlo = document.getElementById("myCanvas");
 var ctxGlo = cGlo.getContext("2d");
 
-function redraw(ctx, notesString) {
+function redraw(ctx, notesString, id = undefined) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+    if (id !== undefined) {
+	    ctx.font = "16px serif";
+	    ctx.fillText(String(id), 10, 15);
+    }
     const notes = makeToCount(notesString);
     const notesSeperated = reSeperatedNotes(notes);
 
@@ -238,8 +242,8 @@ function addPianoCan(notesString) {
 
     var c = document.getElementById(String(pianos.length));
     var ctx = c.getContext("2d");
-
-    redraw(ctx, notesString);
+    
+    redraw(ctx, notesString, pianos.length);
 }
 
 function insertCan(notesString, n) {
@@ -268,7 +272,7 @@ function insertCan(notesString, n) {
     var c = document.getElementById(String(idNum));
     var ctx = c.getContext("2d");
 
-    redraw(ctx, notesString);
+    redraw(ctx, notesString, idNum);
 }
 
 
@@ -324,6 +328,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 	    if (i > number * 2 - 3) {
 		if (child.nodeName == "CANVAS") {
 			child.setAttribute("id", Number(child.id) - 1);
+			child.getContext("2d").clearRect(0, 0, 100, 20);
+			child.getContext("2d").fillText(String(child.id), 10, 15);
 		}else {
 			child.setAttribute("id", "input" + String(Number(child.id.replace("input", "")) - 1)) ;
 		}
@@ -342,6 +348,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (i > number * 2 - 1) {
                 if (child.nodeName == "CANVAS") {
                         child.setAttribute("id", Number(child.id) + 1);
+			child.getContext("2d").clearRect(0, 0, 100, 20);
+			child.getContext("2d").fillText(String(child.id), 10, 15);
                 }else {
                         child.setAttribute("id", "input" + String(Number(child.id.replace("input", "")) + 1)) ;
                 }
