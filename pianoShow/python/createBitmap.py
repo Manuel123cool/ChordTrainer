@@ -169,8 +169,16 @@ countY = 0
 pdf_x = 0
 
 pdf.set_font("Arial", "", 17)
+print(data)
 for count, _ in enumerate(data):
-    if countY > pdf_h:
+    if countY + h > pdf_h and pdf_x == w:
+        pdf.text(pdf_w / 2 - 35, 5, headerTxt)
+        pdf.add_page()
+        pdf_x = 0
+        countY = 0
+
+    if countY + h > pdf_h:
+        print("hallo")
         pdf_x = w
         countY = 0
 
