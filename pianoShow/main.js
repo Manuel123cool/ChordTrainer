@@ -311,6 +311,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     document.getElementById("headerName").addEventListener("input", updateTextarea);
 
+    document.getElementById("ios").addEventListener("input", (event) => {
+	    if (event.target.value.at(-1) == "q") {
+		event.target.value = "";
+		notesStringGlo = [];
+	        redraw(ctxGlo, notesStringGlo);
+		return;
+	    }
+	    notesStringGlo.push(event.target.value.at(-1));
+	    redraw(ctxGlo, notesStringGlo);
+    });
+
     document.getElementById("button4").addEventListener("click", (event) => {
 	    const number = document.getElementById("number").value;
 	    const canvas = document.getElementById("canvases");
