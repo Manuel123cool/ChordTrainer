@@ -4,7 +4,7 @@ import json
 
 
 
-def drawOctave(whichOtave, notes, draw):
+def drawOctave(whichOtave, notes, draw): 
 
     blackNotesPlayed = []
     whiteNotesPlayed = []
@@ -16,11 +16,11 @@ def drawOctave(whichOtave, notes, draw):
         for index, element2 in enumerate(whiteNotesVar):
             if element == element2:
                 whiteNotesPlayed.append(index)
-
+            
         for index, element2 in enumerate(blackNotesVar):
             if element == element2:
                 blackNotesPlayed.append(index)
-
+        
     standardPro = 6
     plusWidth = standardPro * 2
     class StartPos:
@@ -82,7 +82,7 @@ def reSeperatedNotes(notes):
     overallCount = 0
     indexCount = 0
 
-    octaveCount = 4
+    octaveCount = 4 
 
     for i in range(octaveCount):
         notesSeperated.append([])
@@ -92,8 +92,11 @@ def reSeperatedNotes(notes):
 
             note = notes[indexCount]
 
-            if note == j and (note + (i * 12) < (i + 1) * 12):
+            if note == j and (note + (i * 12) < (i + 1) * 12): 
                 notesSeperated[i].append(note)
+                indexCount += 1
+
+            if note * -1 == j and ((note * -1) + (i * 12) < (i + 1) * 12): 
                 indexCount += 1
 
     return notesSeperated
@@ -133,6 +136,11 @@ def makeToCount(notesString):
                 reNotes.append(10)
             case "h":
                 reNotes.append(11)
+            case _:
+                if elem and len(elem) > 1 and elem[-2] == "/":
+                    if len(makeToCount([elem[-1]])) > 0:
+                        reNotes.append(int(makeToCount([elem[-1]])[0]) * -1)
+
     return reNotes
 
 def createImage(notes, count):
@@ -140,8 +148,8 @@ def createImage(notes, count):
     pixels = img.load() # Create the pixel map
     draw = ImageDraw.Draw(img)
 
-
-    notesSeperated = reSeperatedNotes(makeToCount(notes))
+    
+    notesSeperated = reSeperatedNotes(makeToCount(notes)) 
     drawOctave(0, notesSeperated[0], draw)
     drawOctave(1, notesSeperated[1], draw)
     drawOctave(2, notesSeperated[2], draw)
@@ -168,8 +176,7 @@ h = w / 3.64
 countY = 0
 pdf_x = 0
 
-pdf.set_font("Arial", "", 17)
-print(data)
+pdf.set_font("Arial", "", 17) 
 for count, _ in enumerate(data):
     if countY + h > pdf_h and pdf_x == w:
         pdf.text(pdf_w / 2 - 35, 5, headerTxt)
@@ -178,9 +185,8 @@ for count, _ in enumerate(data):
         countY = 0
 
     if countY + h > pdf_h:
-        print("hallo")
         pdf_x = w
-        countY = 0
+        countY = 0  
 
     pdf.image("/var/www/html/pianoShow/python/png_s/chord" + str(count) + ".png", x = pdf_x, y = countY, w = w, h = h, type = '', link = '')
 
