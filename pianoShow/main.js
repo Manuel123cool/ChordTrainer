@@ -117,6 +117,9 @@ function reSeperatedNotes(notes) {
                 notesSeperated[i].push(note);
                 indexCount += 1;
             }
+            if (note * -1 === j &&  (note * -1) + (i * 12) < (i + 1) * 12) {
+                indexCount += 1;
+            }
         }
     }
     return notesSeperated
@@ -165,6 +168,13 @@ function makeToCount(notesString) {
             case "h":
                 reNotes.push(11)
                 break;  
+	    default:
+		if (elem && elem.length > 1 && elem.at(-2) == "/") {
+		     if (makeToCount([elem.at(-1)]).length > 0) {
+		         reNotes.push(Number(makeToCount([elem.at(-1)])[0]) * -1);
+			 break;
+		     }
+		} 
           }
     })
     return reNotes;
@@ -312,10 +322,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.getElementById("headerName").addEventListener("input", updateTextarea);
 
     document.getElementById("ios").addEventListener("input", (event) => {
-	    if (event.target.value.at(-1) == "q") {
+	    if (event.target.value.at(-1) === "q") {
 		event.target.value = "";
 		notesStringGlo = [];
 	        redraw(ctxGlo, notesStringGlo);
+		return;
+	    }
+	    let value = event.target.value; 
+	    if (value.at(-1) === "/") {
+		return;	
+	    }
+	    if (value.length > 1 && value.at(-2) === "/") {
+		notesStringGlo.push(String(value.at(-2) + value.at(-1)));
+		redraw(ctxGlo, notesStringGlo);
 		return;
 	    }
 	    notesStringGlo.push(event.target.value.at(-1));
