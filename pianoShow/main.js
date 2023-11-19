@@ -117,7 +117,7 @@ function reSeperatedNotes(notes) {
                 notesSeperated[i].push(note);
                 indexCount += 1;
             }
-            if (note * -1 === j &&  (note * -1) + (i * 12) < (i + 1) * 12) {
+            if (note !== 0 &&note !== 0 &&  note * -1 === j &&  (note * -1) + (i * 12) < (i + 1) * 12) {
                 indexCount += 1;
             }
         }
@@ -331,6 +331,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 	    let value = event.target.value; 
 	    if (value.at(-1) === "/") {
 		return;	
+	    }
+	    if (event.target.value.length < notesStringGlo.length) {
+		event.target.value = "";
+		notesStringGlo = [];
+	        redraw(ctxGlo, notesStringGlo);
+		return;
 	    }
 	    if (value.length > 1 && value.at(-2) === "/") {
 		notesStringGlo.push(String(value.at(-2) + value.at(-1)));
