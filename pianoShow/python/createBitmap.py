@@ -96,7 +96,7 @@ def reSeperatedNotes(notes):
                 notesSeperated[i].append(note)
                 indexCount += 1
 
-            if note * -1 == j and ((note * -1) + (i * 12) < (i + 1) * 12): 
+            if note != 0 and note * -1 == j and ((note * -1) + (i * 12) < (i + 1) * 12): 
                 indexCount += 1
 
     return notesSeperated
